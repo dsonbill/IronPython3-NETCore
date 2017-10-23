@@ -27,7 +27,6 @@ using System.Security;
 using System.Security.Policy;
 using System.Text;
 using System.Threading;
-using System.Windows.Markup;
 
 using Microsoft.Scripting;
 using Microsoft.Scripting.Generation;
@@ -41,8 +40,6 @@ using IronPython.Runtime;
 using IronPython.Runtime.Exceptions;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
-
-using DependencyObject = System.Windows.DependencyObject;
 
 [assembly: ExtensionType(typeof(IronPythonTest.IFooable), typeof(IronPythonTest.FooableExtensions))]
 namespace IronPythonTest {
@@ -79,50 +76,6 @@ namespace IronPythonTest {
     public delegate string RefStrDelegate(ref string arg);
     public delegate int RefIntDelegate(ref int arg);
     public delegate T GenericDelegate<T, U, V>(U arg1, V arg2);
-
-    [ContentProperty("Content")]
-    public class XamlTestObject : DependencyObject {
-        public event IntIntDelegate Event;
-        public int Method(int arg) {
-            if (Event != null)
-                return Event(arg);
-            
-            return -1;
-        }
-
-        public object Content {
-            get;
-            set;
-        }
-    }
-
-    [ContentProperty("Content")]
-    [RuntimeNameProperty("MyName")]
-    public class InnerXamlTextObject : DependencyObject {
-        public object Content {
-            get;
-            set;
-        }
-
-        public string MyName {
-            get;
-            set;
-        }
-    }
-
-    [ContentProperty("Content")]
-    [RuntimeNameProperty("Name")]
-    public class InnerXamlTextObject2 : DependencyObject {
-        public object Content {
-            get;
-            set;
-        }
-
-        public string Name {
-            get;
-            set;
-        }
-    }
 
     public class ClsPart {
         public int Field;
@@ -211,7 +164,7 @@ namespace IronPythonTest {
             Assert(false, "Expecting exception '" + typeof(T) + "'.");
             return null;
         }
-
+#if FEATURE_REMOTING
         public void ScenarioHostingHelpers() {
             AppDomain remote = AppDomain.CreateDomain("foo");
             Dictionary<string, object> options = new Dictionary<string,object>();
@@ -316,7 +269,7 @@ namespace IronPythonTest {
             } catch (ImportException) {
             }
         }
-
+#endif
         public class ScopeDynamicObject : DynamicObject {
             internal readonly Dictionary<string, object> _members = new Dictionary<string, object>();
             
@@ -1760,7 +1713,7 @@ k = KNew()", SourceCodeKind.Statements);
 
             Dictionary<string, object> dict = new Dictionary<string, object>();
 
-            #region IDictionary<string,object> Members
+#region IDictionary<string,object> Members
 
             public void Add(string key, object value) {
                 if (key.Equals(customSymbol))
@@ -1810,9 +1763,9 @@ k = KNew()", SourceCodeKind.Statements);
                 }
             }
 
-            #endregion
+#endregion
 
-            #region ICollection<KeyValuePair<string,object>> Members
+#region ICollection<KeyValuePair<string,object>> Members
 
             public void Add(KeyValuePair<string, object> item) {
                 throw new NotImplementedException("The method or operation is not implemented.");
@@ -1842,9 +1795,9 @@ k = KNew()", SourceCodeKind.Statements);
                 throw new NotImplementedException("The method or operation is not implemented.");
             }
 
-            #endregion
+#endregion
 
-            #region IEnumerable<KeyValuePair<string,object>> Members
+#region IEnumerable<KeyValuePair<string,object>> Members
 
             public IEnumerator<KeyValuePair<string, object>> GetEnumerator() {                
                 foreach (var keyValue in dict) {
@@ -1854,15 +1807,15 @@ k = KNew()", SourceCodeKind.Statements);
                 yield return new KeyValuePair<string, object>("customSymbol", customSymbolValue);
             }
 
-            #endregion
+#endregion
 
-            #region IEnumerable Members
+#region IEnumerable Members
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
                 throw new NotImplementedException("The method or operation is not implemented.");
             }
 
-            #endregion
+#endregion
         }
 
         public void ScenarioCustomDictionary() {
@@ -2240,7 +2193,7 @@ instOC = TestOC()
 
         // Options.DebugMode
 #endif
-
+#if FEATURE_REMOTING
         public void ScenarioPartialTrust() {
             // basic check of running a host in partial trust
             
@@ -2354,7 +2307,7 @@ if id(a) == id(b):
                     throw new Exception("Debugging is enabled even though Options.DebugMode is not specified");
             }
         }
-
+#endif
         // Compile and Run
         public void ScenarioCompileAndRun() {
             ClsPart clsPart = new ClsPart();

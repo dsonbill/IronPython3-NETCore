@@ -391,7 +391,7 @@ namespace IronPython.Modules {
                 if ((sam & KEY_SET_VALUE) == KEY_SET_VALUE ||
                     (sam & KEY_CREATE_SUB_KEY) == KEY_CREATE_SUB_KEY) {
                         if (res != 0) {
-#if NETSTANDARD
+#if NETCOREAPP2_0
                             newKey = nativeRootKey.OpenSubKey(subKeyName, (RegistryRights)res);
 #else
                             newKey = nativeRootKey.OpenSubKey(subKeyName, RegistryKeyPermissionCheck.Default, (RegistryRights)res);
@@ -403,7 +403,7 @@ namespace IronPython.Modules {
                            (sam & KEY_ENUMERATE_SUB_KEYS) == KEY_ENUMERATE_SUB_KEYS ||
                            (sam & KEY_NOTIFY) == KEY_NOTIFY) {
                                if (res != 0) {
-#if NETSTANDARD
+#if NETCOREAPP2_0
                                    newKey = nativeRootKey.OpenSubKey(subKeyName, (RegistryRights)res);
 #else
                                    newKey = nativeRootKey.OpenSubKey(subKeyName, RegistryKeyPermissionCheck.ReadSubTree, (RegistryRights)res);
@@ -525,7 +525,7 @@ namespace IronPython.Modules {
             if (string.IsNullOrEmpty(computerName))
                 computerName = string.Empty;
 
-#if NETSTANDARD
+#if NETCOREAPP2_0
             if (computerName != string.Empty) {
                 throw PythonExceptions.CreateThrowable(PythonExceptions.OSError);
             }
@@ -536,7 +536,7 @@ namespace IronPython.Modules {
                 if (computerName == string.Empty) {
                     newKey = RegistryKey.OpenBaseKey(MapSystemKey(key), RegistryView.Default);
                 }
-#if !NETSTANDARD
+#if !NETCOREAPP2_0
                 else {
                     newKey = RegistryKey.OpenRemoteBaseKey(MapSystemKey(key), computerName);
                 }

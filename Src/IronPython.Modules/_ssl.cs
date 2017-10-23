@@ -308,7 +308,7 @@ namespace IronPython.Modules {
 
             } finally {
                 if(store != null) {
-#if NETSTANDARD
+#if NETCOREAPP2_0
                     store.Dispose();
 #else
                     store.Close();
@@ -332,7 +332,7 @@ namespace IronPython.Modules {
 
             } finally {
                 if (store != null) {
-#if NETSTANDARD
+#if NETCOREAPP2_0
                     store.Dispose();
 #else
                     store.Close();
@@ -395,7 +395,7 @@ namespace IronPython.Modules {
             return DateTime.Parse(date).ToUniversalTime().ToString("MMM d HH:mm:ss yyyy") + " GMT";
         }
 
-#if NETSTANDARD
+#if NETCOREAPP2_0
         private static string ByteArrayToString(IEnumerable<byte> bytes) {
             var builder = new StringBuilder();
             foreach (byte b in bytes)
@@ -522,7 +522,7 @@ namespace IronPython.Modules {
             }
 
             if (cert != null) {
-#if !NETSTANDARD
+#if !NETCOREAPP2_0
                 if (key != null) {
                     try {
                         cert.PrivateKey = key;

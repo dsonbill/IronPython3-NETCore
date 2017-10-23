@@ -13,11 +13,17 @@
     <summary>IronPython is an open-source implementation of the Python programming language which is tightly integrated with the .NET Framework.</summary>
     <language>en-US</language>
     <tags>ironpython python dynamic dlr</tags>
+
     <dependencies>
-      <dependency id="DynamicLanguageRuntime" version="1.5.0" />
+      <dependency id="Microsoft.Dynamic" version="1.2.0" />
+      <dependency id="System.Text.Encoding.CodePages" version="4.4.0" />
+      <dependency id="System.Security.Permissions" version="4.4.0" />
     </dependencies>
+
   </metadata>
+
   <files>
-    <file src="Platforms\**\*.*" target="lib" />
+    <file src="bin\Release\**\DLLs\*.*" target="lib" exclude="**\Microsoft.*.*" />
   </files>
+
 </package>

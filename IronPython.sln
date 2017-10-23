@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronPython", "Src\IronPython\IronPython.csproj", "{95289EA9-5778-489D-AB48-F81F2CE2DA32}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronPython.Modules", "Src\IronPython.Modules\IronPython.Modules.csproj", "{155CE436-1669-4A48-8095-410F2430237F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronPythonTest", "Src\IronPythonTest\IronPythonTest.csproj", "{B6B42537-07F8-4F6C-A99A-B155CAEB124E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronPythonConsoleAny", "Src\IronPythonConsoleAny\IronPythonConsoleAny.csproj", "{F1D861C5-D9D5-4CDA-968B-8275F5D9F6D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A14D070-628F-44EF-92DD-47C8BE5C33CD}"
 	ProjectSection(SolutionItems) = preProject
@@ -79,10 +77,6 @@ Global
 		{B6B42537-07F8-4F6C-A99A-B155CAEB124E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6B42537-07F8-4F6C-A99A-B155CAEB124E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6B42537-07F8-4F6C-A99A-B155CAEB124E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1D861C5-D9D5-4CDA-968B-8275F5D9F6D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1D861C5-D9D5-4CDA-968B-8275F5D9F6D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1D861C5-D9D5-4CDA-968B-8275F5D9F6D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1D861C5-D9D5-4CDA-968B-8275F5D9F6D2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4A617A40-2BA7-4713-AAFE-F90C4325C581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4A617A40-2BA7-4713-AAFE-F90C4325C581}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A617A40-2BA7-4713-AAFE-F90C4325C581}.Release|Any CPU.ActiveCfg = Release|Any CPU

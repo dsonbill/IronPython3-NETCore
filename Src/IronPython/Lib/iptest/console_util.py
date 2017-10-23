@@ -20,8 +20,8 @@ Its purpose is to enable testing behaviour of the top-level console,
 when that differs from behaviour while importing a module and executing
 its statements.
 """
-from .test_env import is_netstandard, is_posix
-if is_netstandard:
+from .test_env import is_NETCOREAPP2_0, is_posix
+if is_NETCOREAPP2_0:
     import clr
     clr.AddReference("System.Diagnostics.Process")
 from System.Diagnostics import Process, ProcessStartInfo

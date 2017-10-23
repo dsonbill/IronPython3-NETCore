@@ -143,7 +143,7 @@ def source_root():
     return _root
 
 def _add_reference_to_dlr_core():
-    if is_cli and not is_netstandard:
+    if is_cli and not is_NETCOREAPP2_0:
         clr.AddReference("System.Core")
 
 _iron_python_test_dll = os.path.join(sys.prefix, 'IronPythonTest.exe')
@@ -360,7 +360,7 @@ def run_test(name):
 #     if not rowan_root:
 #         rowan_root = sys.prefix
 #         if is_cli:
-#             if is_netstandard:
+#             if is_NETCOREAPP2_0:
 #                 import clr
 #                 clr.AddReference("System.IO.FileSystem")
 #             if System.IO.Directory.Exists(path_combine(rowan_root, '../../Src')):

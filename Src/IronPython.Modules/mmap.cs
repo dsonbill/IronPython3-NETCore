@@ -203,7 +203,7 @@ namespace IronPython.Modules {
                     }
 
                     _file = MemoryMappedFile.CreateFromFile(
-                        _sourceStream, _mapName, _sourceStream.Length, _fileAccess, null, HandleInheritability.None, true
+                        _sourceStream, _mapName, _sourceStream.Length, _fileAccess, HandleInheritability.None, true
                     );
                 }
 
@@ -596,7 +596,7 @@ namespace IronPython.Modules {
                         }
 
                         _file = MemoryMappedFile.CreateFromFile(
-                            _sourceStream, _mapName, _sourceStream.Length, _fileAccess, null, HandleInheritability.None, leaveOpen
+                            _sourceStream, _mapName, _sourceStream.Length, _fileAccess, HandleInheritability.None, leaveOpen
                         );
 
                         _view = _file.CreateViewAccessor(_offset, newsize, _fileAccess);

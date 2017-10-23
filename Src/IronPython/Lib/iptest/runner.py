@@ -20,10 +20,10 @@ import os
 from exceptions import SystemExit
 
 from iptest import *
-from iptest.test_env import is_netstandard
+from iptest.test_env import is_NETCOREAPP2_0
 
 if sys.platform!="win32":
-    if is_netstandard:
+    if is_NETCOREAPP2_0:
         import clr
         clr.AddReference("System.IO.FileSystem")
     from System.IO.Path import GetFullPath as get_path

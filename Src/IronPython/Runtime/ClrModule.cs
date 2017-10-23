@@ -53,10 +53,10 @@ namespace IronPython.Runtime {
     /// </summary>
     public static class ClrModule {
 
-#if NETSTANDARD
-        public static readonly bool IsNetStandard = true;
+#if NETCOREAPP2_0
+        public static readonly bool IsNETCOREAPP2_0 = true;
 #else
-        public static readonly bool IsNetStandard = false;
+        public static readonly bool IsNETCOREAPP2_0 = false;
 #endif
 
 #if NETCOREAPP2_0

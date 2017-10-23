@@ -4,11 +4,11 @@
     <MajorVersion>3</MajorVersion>
     <MinorVersion>0</MinorVersion>
     <MicroVersion>0</MicroVersion>
-    <ReleaseLevel>alpha</ReleaseLevel>
+    <ReleaseLevel>final</ReleaseLevel>
     <ReleaseSerial>0</ReleaseSerial>
 
     <AssemblyRevision>0</AssemblyRevision>
     
-    <DlrVersion>1.2.0-alpha1</DlrVersion>
+    <DlrVersion>1.2.0</DlrVersion>
   </PropertyGroup>
 </Project>

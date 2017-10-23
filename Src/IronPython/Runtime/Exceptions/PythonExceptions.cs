@@ -1017,7 +1017,7 @@ for k, v in toError.items():
                 pyExcep = new BaseException(TypeError);
             } else if (clrException is Win32Exception) {
                 Win32Exception win32 = (Win32Exception)clrException;
-#if NETSTANDARD
+#if NETCOREAPP2_0
                 int errorCode = win32.HResult;
 #else
                 int errorCode = win32.ErrorCode;

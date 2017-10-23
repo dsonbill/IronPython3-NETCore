@@ -84,7 +84,7 @@ namespace IronPython.Modules {
             }
         }
 
-#if NETSTANDARD
+#if NETCOREAPP2_0
         public static Sha256Object sha224(object data) {
             throw new NotImplementedException();
         }

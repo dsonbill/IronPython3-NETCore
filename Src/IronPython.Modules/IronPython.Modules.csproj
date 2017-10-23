@@ -35,6 +35,9 @@
     <Compile Remove="Properties\CurrentVersion.Generated.cs" />
     <Compile Remove="Properties\BuildInfo.Generated.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Win32.Registry" Version="4.4.0" />
+  </ItemGroup>
   <Import Project="$(AfterTargetFiles)" />
   <Target Name="AfterBuild" DependsOnTargets="$(AfterTargets)" />
 </Project>

@@ -39,6 +39,7 @@ using IronPython.Runtime.Types;
 
 using PythonArray = IronPython.Modules.ArrayModule.array;
 using SpecialNameAttribute = System.Runtime.CompilerServices.SpecialNameAttribute;
+using System.Runtime.CompilerServices;
 
 [assembly: PythonModule("_socket", typeof(IronPython.Modules.PythonSocket))]
 namespace IronPython.Modules {
@@ -66,13 +67,13 @@ namespace IronPython.Modules {
             return context.EnsureModuleException("socketerror", PythonExceptions.OSError, dict, "error", "socket");
         }
 
-#if NETSTANDARD
+#if NETCOREAPP2_0
         private static ConditionalWeakTable<Socket, object> fakeHandles = new ConditionalWeakTable<Socket, object>();
         private static long maxHandle = 0;
 #endif
 
         private static IntPtr GetHandle(this Socket socket) {
-#if NETSTANDARD
+#if NETCOREAPP2_0
             object handle;
             lock (fakeHandles) {
                 if (!fakeHandles.TryGetValue(socket, out handle)) {
@@ -201,7 +202,7 @@ namespace IronPython.Modules {
                 }
             }
 
-#if !NETSTANDARD
+#if !NETCOREAPP2_0
             private IAsyncResult _acceptResult;
 #endif
             [Documentation("accept() -> (conn, address)\n\n"
@@ -214,7 +215,7 @@ namespace IronPython.Modules {
                 socket wrappedRemoteSocket;
                 Socket realRemoteSocket;
                 try {
-#if NETSTANDARD
+#if NETCOREAPP2_0
                     // TODO: support timeout != 0
                     realRemoteSocket = _socket.Accept();
 #else
@@ -1310,7 +1311,7 @@ namespace IronPython.Modules {
         }
 
         private static IPHostEntry GetHostEntry(string host) {
-#if NETSTANDARD
+#if NETCOREAPP2_0
             try {
                 return Dns.GetHostEntryAsync(host).Result;
             }
@@ -1324,7 +1325,7 @@ namespace IronPython.Modules {
         }
 
         private static IPAddress[] GetHostAddresses(string host) {
-#if NETSTANDARD
+#if NETCOREAPP2_0
             try {
                 return Dns.GetHostAddressesAsync(host).Result;
             }
@@ -1527,7 +1528,7 @@ namespace IronPython.Modules {
 
             IPHostEntry hostEntry = null;
             try {
-#if NETSTANDARD
+#if NETCOREAPP2_0
                 hostEntry = Dns.GetHostEntryAsync(addrs[0]).Result;
 #else
                 hostEntry = Dns.GetHostEntry(addrs[0]);
@@ -2645,7 +2646,7 @@ namespace IronPython.Modules {
 
             private void ValidateCertificate(X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) {
                 chain = new X509Chain();
-#if NETSTANDARD
+#if NETCOREAPP2_0
                 // missing the X509Certificate2.ctor(X509Certificate) in .NET Core 1.0
                 chain.ChainPolicy.ExtraStore.AddRange(_certCollection);
                 chain.Build((X509Certificate2)certificate);
@@ -2702,7 +2703,7 @@ namespace IronPython.Modules {
 
                 try {
                     if (_serverSide) {
-#if NETSTANDARD
+#if NETCOREAPP2_0
                         _sslStream.AuthenticateAsServerAsync(_cert, _certsMode == PythonSsl.CERT_REQUIRED, SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls, false).Wait();
 #else
                         _sslStream.AuthenticateAsServer(_cert, _certsMode == PythonSsl.CERT_REQUIRED, SslProtocols.Default, false);
@@ -2714,7 +2715,7 @@ namespace IronPython.Modules {
                         if (_cert != null) {
                             collection.Add(_cert);
                         }
-#if NETSTANDARD
+#if NETCOREAPP2_0
                         _sslStream.AuthenticateAsClientAsync(_socket._hostName, collection, SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls, false).Wait();
 #else
                         _sslStream.AuthenticateAsClient(_socket._hostName, collection, SslProtocols.Default, false);
@@ -2972,7 +2973,7 @@ Read up to len bytes from the SSL socket.")]
         static extern Int32 WSACleanup();
 
         private static T PtrToStructure<T>(IntPtr result) {
-#if NETSTANDARD
+#if NETCOREAPP2_0
             return Marshal.PtrToStructure<T>(result);
 #else
             return (T)Marshal.PtrToStructure(result, typeof(T));
