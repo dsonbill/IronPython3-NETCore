@@ -3,9 +3,10 @@
 
   <PropertyGroup>
     <BuildFlavour Condition=" '$(BuildFlavour)' == '' ">Debug</BuildFlavour>
-    <MainPlatform Condition=" '$(MainPlatform)' == '' ">net45</MainPlatform>
+    <MainPlatform Condition=" '$(MainPlatform)' == '' ">netcoreapp2.0</MainPlatform>
     <MainBuildPrefix Condition=" '$(MainBuildPrefix)' == '' "></MainBuildPrefix>
     <Mono Condition="'$(OS)' != 'Windows_NT'">true</Mono>
+    <GlobalTargetFramework>netcoreapp2.0</GlobalTargetFramework>
 
     <RootDir>$(MSBuildThisFileDirectory)</RootDir>
     <Solution>$(RootDir)\IronPython.sln</Solution>

@@ -59,6 +59,12 @@ namespace IronPython.Runtime {
         public static readonly bool IsNetStandard = false;
 #endif
 
+#if NETCOREAPP2_0
+        public static readonly bool IsNetCoreApp = true;
+#else
+        public static readonly bool IsNetCoreApp = false;
+#endif
+
 #if DEBUG
         public static readonly bool IsDebug = true;
 #else

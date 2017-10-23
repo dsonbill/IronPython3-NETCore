@@ -45,7 +45,7 @@ namespace IronPython.Compiler {
             _names = names;
             _moduleName = moduleName;
         }
-
+#if !NETCOREAPP2_0
         protected override KeyValuePair<MethodBuilder, Type> CompileForSave(TypeGen typeGen) {
             var lambda = RewriteForSave(typeGen, _code);
 
@@ -59,7 +59,7 @@ namespace IronPython.Compiler {
 
             return new KeyValuePair<MethodBuilder, Type>(mb, typeof(LookupCompilationDelegate));
         }
-
+#endif
         public override object Run() {
             throw new NotSupportedException();
         }
@@ -72,13 +72,13 @@ namespace IronPython.Compiler {
             throw new NotSupportedException();
         }
 
-        #region ICustomScriptCodeData Members
+#region ICustomScriptCodeData Members
 
         string ICustomScriptCodeData.GetCustomScriptCodeData() {
             return _moduleName;
         }
 
-        #endregion
+#endregion
     }
 }
 

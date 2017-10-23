@@ -252,12 +252,21 @@ namespace IronPython.Hosting {
         private void InitializeModules() {
             string executable = "";
             string prefix = null;
- 
             Assembly entryAssembly = Assembly.GetEntryAssembly();
             //Can be null if called from unmanaged code (VS integration scenario)
             if (entryAssembly != null) {
                 executable = entryAssembly.Location;
                 prefix = Path.GetDirectoryName(executable);
+#if NETCOREAPP2_0
+                if (Path.GetExtension(executable) == ".dll") {
+                    var name = Path.GetFileNameWithoutExtension(executable);
+                    var runner = Path.Combine(prefix, name + ".bat");
+                    if (Environment.OSVersion.Platform == PlatformID.Unix) {
+                        runner = Path.Combine(prefix, name);
+                    }
+                    if (File.Exists(runner)) executable = runner;
+                }
+#endif
             }
 
             // Make sure there an IronPython Lib directory, and if not keep looking up

@@ -115,9 +115,10 @@ namespace IronPythonCompiler {
                         case "exe":
                             Target = PEFileKinds.ConsoleApplication;
                             break;
-                        case "winexe":
-                            Target = PEFileKinds.WindowApplication;
-                            break;
+                        // No Forms in .NET Core
+                        //case "winexe":
+                        //    Target = PEFileKinds.WindowApplication;
+                        //    break;
                         default:
                             Target = PEFileKinds.Dll;
                             break;

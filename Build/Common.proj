@@ -8,6 +8,7 @@
     <RootDir Condition=" '$(RootDir)' == '' ">$(MSBuildThisFileDirectory)..</RootDir>
     <BuildSysDir Condition=" '$(BuildSysDir)' == '' ">$(RootDir)\Build</BuildSysDir>
     <ReferenceDir Condition=" '$(ReferenceDir)' == '' ">$(RootDir)\Util\References</ReferenceDir>
+    <GlobalTargetFramework>netcoreapp2.0</GlobalTargetFramework>
 
     <Mono Condition=" '$(Mono)' == '' and '$(OS)' != 'Windows_NT'">true</Mono>
     
@@ -15,6 +16,7 @@
          additional assembly references. -->
     <NoConfig>true</NoConfig>
     <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   
@@ -57,21 +59,21 @@
        used). Fill then in here based on the selected configuration. -->
   <PropertyGroup Condition=" '$(BuildFlavour)' == '' ">
     <BuildFlavour>Debug</BuildFlavour>
-    <BuildFlavour Condition="'$(Configuration)' == 'FxCop'">Release</BuildFlavour>
     <BuildFlavour Condition="'$(Configuration)' == 'Release'">Release</BuildFlavour>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(ReferencedPlatform)' == ''">
-    <ReferencedPlatform>net45</ReferencedPlatform>
+    <ReferencedPlatform>$(GlobalTargetFramework)</ReferencedPlatform>
+    <!-- <ReferencedPlatform Condition="'$(TargetFramework)' != ''">$(TargetFramework)</ReferencedPlatform> -->
   </PropertyGroup>
 
   <PropertyGroup>
     <CSharpTargets Condition="'$(CSharpTargets)' == ''">$(MSBuildBinPath)\Microsoft.CSharp.targets</CSharpTargets>
-    <WpfReferences>$(RootDir)\Util\References\WPF\4.0</WpfReferences>
+    <!-- <WpfReferences>$(RootDir)\Util\References\WPF\4.0</WpfReferences> -->
   </PropertyGroup>
 
   <!-- References -->
-  <Import Project="$(BuildSysDir)\$(ReferencedPlatform).props" />
+  <Import Project="$(BuildSysDir)\$(GlobalTargetFramework).props" />
   
   <PropertyGroup>
     <BaseOutputPath>$(RootDir)\bin\$(Configuration)</BaseOutputPath>
